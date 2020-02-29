@@ -17,7 +17,8 @@ intro_panel <- tabPanel(
   # A paragraph `p()` describing with the text: "The below diagram was created
   # by the New York Times to illustrate the increasing level of inequality in
   # the US."
-p("The below diagram was created by the New York Times to illustrate the "),
+p("The below diagram was created by the New York Times to illustrate the 
+  the increasing level of inequality in the US."),
 
   # An image `img()` to display. This content should have a `src` attribute of
   # "inequality.png" (which will refer to the file in the `www/` folder).
@@ -35,8 +36,18 @@ p(
   # A paragraph containing a 1-2 sentence description of what the diagram
   # shows. Your paragraph should include both `strong()` and emphasized `em()`
   # text.
-  
+p(
+  "The graph shows how the richest 1% of people have seen their incomes jump",
+  strong("6%"),
+  "since 1980",
+  "while the bottom 60% have barely seen any increase",
+  em("(their income has stagnated).")
+),
+
+p('Click on the "Growth Chart" tab to see an interactive diagram.')
 )
+  
+
 # Next, we'll define a few UI elements to render in our second panel
 
 # Define a variable `sidebar_content` as a `sidebarPanel()` UI element
@@ -61,7 +72,7 @@ plotOutput(outputId = "plot"),
     a(href = "http://gabriel-zucman.eu/usdina/", "")
   )
   
-  
+)
 )
 
 # Define a variable `growth_panel` for your second page. It should be a
@@ -75,9 +86,12 @@ gowth_panel <- tabPanel(
   # The sidebar layout will contain elements:
   sidebarLayout(
     # Your `sidebar_content`
-  sidebarLayout(
+
     # Your `main_content`
-    sidebar
+    sidebar_content,
+    main_content
+  )
+)
 
 # Finally, define a `ui` variable, assigning it a `navbarPage()` layout.
 # You will use `shinyUI()` to render this variable (in `app.R`)
@@ -87,5 +101,7 @@ gowth_panel <- tabPanel(
 # - Your `growth_panel`
 
 ui <- navbarPage(
-  title = 
+  title = "Income Inequality",
+  intro_panel,
+  growth_panel
 )

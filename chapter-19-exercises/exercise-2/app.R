@@ -10,14 +10,16 @@ ui <- fluidPage(
   numericInput(inputId = "price", label = "Price (in dollars)", value = 0, min = 0),
   numericInput(inputId = "quantity", label= "Quantity", value = 1, min = 1),
   p(strong("Cost")),
-  textOutput(outputId = "cost"),
+  textOutput(outputId = "cost")
+)
+server <-  function(input_list, output_list)
   
   output_list$cost <- renderText({
     total <- input_list$price * input_list$quantity
     return(paste0("$",total))
   })  
   
-)
+shinyApp(ui = ui, server = server)
   
   # A `titlePanel()` layout with the text "Cost Calculator"
 
